@@ -2,27 +2,37 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Solicitacao {
-    private static int protocolo;
-    private static Categoria categoria;
-    private static String descricao;
-    private static String localizacao;
-    private static Status status;
-    private static LocalDateTime dataCriacao;
+    private final int protocolo;
+    private final Categoria categoria;
+    private final String descricao;
+    private final String localizacao;
+    private Status status;
+    private final LocalDateTime dataCriacao;
+
+    public Solicitacao(int protocolo, Categoria categoria, String descricao,
+                       String localizacao, Status status, LocalDateTime dataCriacao) {
+        this.protocolo = protocolo;
+        this.categoria = categoria;
+        this.descricao = descricao;
+        this.localizacao = localizacao;
+        this.status = status;
+        this.dataCriacao = dataCriacao;
+    }
 
     public int getProtocolo() {
         return protocolo;
     }
 
-    public void setProtocolo(int protocolo) {
-        this.protocolo = protocolo;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
+    public String getLocalizacao() {
+        return localizacao;
     }
 
     public Status getStatus() {
@@ -33,40 +43,22 @@ public class Solicitacao {
         this.status = status;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        Solicitacao.descricao = descricao;
-    }
-
-    public String getLocalizacao() {
-        return localizacao;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
-    public static void visualizarSolicitacao() {
-        System.out.println("========================================");
-        System.out.println("  DETALHES DA SOLICITAÇÃO");
-        System.out.println("========================================");
-        System.out.printf("  Protocolo  : #%06d%n", protocolo);
-        System.out.printf("  Categoria  : %s%n", categoria);
-        System.out.printf("  Status     : %s%n", status);
-        System.out.printf("  Descrição  : %s%n", descricao);
-        System.out.printf("  Localização: %s%n", localizacao);
-        System.out.printf("  Criado em  : %s%n", dataCriacao.format(DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm:ss")));
-        System.out.println("========================================");
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm:ss");
+        return "========================================\n" +
+               "  DETALHES DA SOLICITAÇÃO\n" +
+               "========================================\n" +
+               String.format("  Protocolo  : #%06d%n", protocolo) +
+               String.format("  Categoria  : %s%n", categoria) +
+               String.format("  Status     : %s%n", status) +
+               String.format("  Descrição  : %s%n", descricao) +
+               String.format("  Localização: %s%n", localizacao) +
+               String.format("  Criado em  : %s%n", dataCriacao.format(formatter)) +
+               "========================================";
     }
 }
